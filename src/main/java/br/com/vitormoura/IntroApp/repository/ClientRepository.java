@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface ClientRepository extends JpaRepository<ClienteModel, Long> {
 
-    Optional<ClienteModel>findByID(long id);
+    Optional<ClienteModel>findById(long id);
 
     List<ClienteModel>findByNameContainsIgnoreCaseOrderByName(String name);
 

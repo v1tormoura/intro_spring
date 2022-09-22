@@ -27,7 +27,7 @@ public class ClienteService {
     }
 
     public ClienteModel update(ClienteModel model){
-        var found = repository.findByID(model.getId());
+        var found = repository.findById(model.getId());
         if(found.isPresent()){
             found.get().setName(model.getName());
             found.get().setGender(model.getGender());
@@ -38,5 +38,10 @@ public class ClienteService {
         }
     }
 
-    
+    public void delete(long id){
+        var found = repository.findById(id);
+        if(found.isPresent()){
+            repository.delete(found.get());
+        }
+    }
 }
