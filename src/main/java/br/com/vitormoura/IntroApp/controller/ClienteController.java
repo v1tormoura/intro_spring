@@ -3,6 +3,7 @@ package br.com.vitormoura.IntroApp.controller;
 import br.com.vitormoura.IntroApp.model.ClienteModel;
 import br.com.vitormoura.IntroApp.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.desktop.OpenFilesEvent;
@@ -30,4 +31,21 @@ public class ClienteController {
     public ClienteModel save(@RequestBody ClienteModel model){
         return service.save(model);
     }
+
+    @PutMapping
+    public ClienteModel update(@RequestBody ClienteModel model){
+        return service.update(model);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") long id){
+        var found = service.findById(id);
+        if(found.isPresent()){
+            service.delete(id);
+            return ResponseEntity.ok().build();
+        } else {
+            return null;
+        }
+    }
+
 }
