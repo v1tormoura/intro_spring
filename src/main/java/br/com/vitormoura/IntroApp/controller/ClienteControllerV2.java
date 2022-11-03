@@ -1,21 +1,21 @@
 package br.com.vitormoura.IntroApp.controller;
 
 import br.com.vitormoura.IntroApp.model.ClienteModel;
-import br.com.vitormoura.IntroApp.service.ClienteService;
+import br.com.vitormoura.IntroApp.service.ClientServiceV1;
+import br.com.vitormoura.IntroApp.service.ClientServiceV2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.desktop.OpenFilesEvent;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/clients")
-public class ClienteController {
+@RequestMapping("/clients/v2")
+public class ClienteControllerV2 {
 
     @Autowired
-    private ClienteService service;
+    private ClientServiceV2 service;
 
     @GetMapping("/{id}")
     public Optional<ClienteModel> findById(@PathVariable("id") long id){
@@ -46,6 +46,11 @@ public class ClienteController {
         } else {
             return null;
         }
+    }
+
+    @GetMapping("/find/email/{email}")
+    public List<ClienteModel> findByEmail(@PathVariable("email") String email){
+        return service.findByEmail(email);
     }
 
 }

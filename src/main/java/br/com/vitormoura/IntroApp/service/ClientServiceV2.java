@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClienteService {
+public class ClientServiceV2 {
 
     @Autowired
     private ClientRepository repository;
@@ -32,6 +32,7 @@ public class ClienteService {
             found.get().setName(model.getName());
             found.get().setGender(model.getGender());
             found.get().setCity(model.getCity());
+            found.get().setCity(model.getEmail());
             return repository.save(found.get());
         }else {
             return null;
@@ -44,4 +45,9 @@ public class ClienteService {
             repository.delete(found.get());
         }
     }
+
+    public List<ClienteModel> findByEmail(String email){
+        return repository.findByEmailStartsWithIgnoreCase(email);
+    }
+
 }

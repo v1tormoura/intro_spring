@@ -28,5 +28,17 @@ public class ClienteModel {
     @Setter @Getter
     private String city;
 
+    //..new attributes of V2
+    @Column(nullable = true, length = 100)
+    @Getter @Setter
+    private String email;
+
+    //.. relationship with ProfessionModel
+    @ManyToOne
+    @JoinColumn(name = "profession_id")
+    @Setter @Getter
+    private ProfessionModel profession;
+
+
 
 }
